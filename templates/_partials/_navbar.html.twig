@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand-lg bg-blue container-fluid">
     <div class="container-fluid">
-        <a class="navbar-brand title-navbar" href="{{path('app_main')}}">MOULIN Jordan</a>
+        <a class="navbar-brand title-navbar" href="{{path('app_main')}}">
+        
+            {% if app.user is null %}
+                <h3>Portfolio</h3>
+            {% else %}
+                <h3>{{ app.user.username }}</h3>
+            {% endif %}
+        
+        </a>
         <ul class="d-flex mb-0 menu-navbar">
             <li>
                 <a class="nav-link" href="{{path('app_main')}}">
@@ -17,18 +25,34 @@
                     Maquettage
                 </a>
             </li>
+            {% if app.user %}
+            <li>
+                <a class="nav-link" href="{{path('admin')}}">
+                    Créez votre projet
+                </a>
+            </li>
+            {% endif %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     Mon profil
                 </a>
                 <ul class="dropdown-menu dropdown-menu-blue " aria-labelledby="navbarDarkDropdownMenuLink">
-                    <li>
-                        <a class="dropdown-item" href="{{path("login")}}">Connexion</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{path('app_register')}}">Inscription</a>
-                    </li>
+                    {% if not app.user %}
+                        <li>
+                            <a class="dropdown-item" href="{{path("login")}}">Connexion</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="{{path('app_register')}}">Inscription</a>
+                        </li>
+                    {% else %}
+                        <li>
+                        <a class="dropdown-item" href="{{path('logout')}}">Déconnexion</a>
+                        </li>
+                    {% endif %}
+                   
+                    
                 </ul>
             </li>
         </ul>

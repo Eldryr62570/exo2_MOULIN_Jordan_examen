@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ProjectRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProjectRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectRepository::class)
@@ -28,7 +30,7 @@ class Project
     private $url_image;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $description_projet;
 
@@ -36,6 +38,29 @@ class Project
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projects")
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lien_github;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lien_projet;
+
+    public function __construct()
+    {
+        $now = new DateTime('now');
+        $this->created_at = $now;
+
+
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +111,42 @@ class Project
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTime $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getLienGithub(): ?string
+    {
+        return $this->lien_github;
+    }
+
+    public function setLienGithub(string $lien_github): self
+    {
+        $this->lien_github = $lien_github;
+
+        return $this;
+    }
+
+    public function getLienProjet(): ?string
+    {
+        return $this->lien_projet;
+    }
+
+    public function setLienProjet(string $lien_projet): self
+    {
+        $this->lien_projet = $lien_projet;
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Controller\Project;
 
+use App\Entity\Project;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -27,6 +29,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        
+        yield MenuItem::linkToCrud('User' , 'fa fa-user', User::class)->setPermission('ROLE_ADMIN');
+       
+        yield MenuItem::linkToCrud('Projets', 'fas fa-list', Project::class);
+        
     }
+    
+    
 }

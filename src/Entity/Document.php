@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Document
 {
+    const DOCUMENT_ADDED_SUCCESSFULLY = "DOCUMENT_ADDED_SUCCESSFULLY";
+    const DOCUMENT_INVALID_FORM = "DOCUMENT_INVALID_FORM";
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

@@ -26,7 +26,7 @@ class MainController extends AbstractController
         ]);
     }
     /**
-     * @Route("/document", name="document")
+     * @Route("/projets/document", name="document")
      */
     public function document(Request $request, DocumentService $documentService ) : Response{ 
         $document = new Document();

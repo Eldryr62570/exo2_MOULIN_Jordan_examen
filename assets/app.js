@@ -25,7 +25,6 @@ import "@fortawesome/fontawesome-free/js/all"
 const $ = require('jquery');
 import "slick-carousel/slick/slick"
 import "slick-carousel/slick/slick.css"
-
 if (document.querySelector("#form_document") !== null) {
   var formDocument = document.querySelector("#form_document")
   formDocument.addEventListener('submit', (e) => {
@@ -34,18 +33,10 @@ if (document.querySelector("#form_document") !== null) {
         body: new FormData(e.target),
         method: 'POST'
       })
-      
       .then(() => {
         var data = new FormData(e.target)
-        
         var titre = data.get("document[title_document]")
         var texte = data.get("document[text]")
-        
-      
-        
-
-        console.log(titre);
-        console.log(texte);
         var messageDiv = document.querySelector(".message")
         var dd = {
           content: [{
@@ -53,10 +44,7 @@ if (document.querySelector("#form_document") !== null) {
               style: 'header'
             },
             texte + '\n\n',
-            {
-              text: 'Crée par M.',
-              style: ['quote', 'small']
-            }
+            
           ],
           styles: {
             header: {
@@ -76,12 +64,9 @@ if (document.querySelector("#form_document") !== null) {
           }
 
         }
-        messageDiv.innerHTML = '  <div class="alert alert-check" role="alert">Message envoyé au serveur !</div>'
-
-
-        pdfMake.createPdf(dd).print({}, window);
-
-
+        messageDiv.innerHTML = '  <div class="alert alert-check" role="alert">Pdf généré et envoyé en bdd</div>'
+        var win = window.open('', '_blank');
+        pdfMake.createPdf(dd).print({}, win);
       })
 
 

@@ -32,8 +32,6 @@ class MainController extends AbstractController
         $document = new Document();
         $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
-       
-
         if ($form->isSubmitted()) {
             $currentUser = $this->getUser();
             $document->setUser($currentUser);

@@ -24,11 +24,9 @@ class DocumentService
     }
 
     public function handleValidForm(FormInterface $documentForm) : JsonResponse{
-        $document = $documentForm->getData();
-        
+        $document = $documentForm->getData();   
         $this->em->persist($document);
         $this->em->flush();
-
         return new JsonResponse([
             'code' => Document::DOCUMENT_ADDED_SUCCESSFULLY,
             'html' => ''

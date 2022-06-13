@@ -22,9 +22,26 @@ const $ = require('jquery');
 import "slick-carousel/slick/slick"
 import "slick-carousel/slick/slick.css"
 
-var numberSlide = $('.js-slick-carousel > div').length;
+if(document.querySelector("#form_document") !== null){
+  var formDocument =  document.querySelector("#form_document")
+  formDocument.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    fetch(document.location.href , {
+      body : new FormData(e.target),
+      method : 'POST'
+    }).then(()=>{
+      var messageDiv = document.querySelector(".message")
+      messageDiv.innerHTML = '  <div class="alert alert-check" role="alert">Message envoyé au serveur !</div>'
+    })
 
-if(numberSlide < 5){
+
+  } )
+
+}
+
+
+if(numberSlide < 5 && document.querySelector("#next") !== null && document.querySelector("#next" !== null)){
+   var numberSlide = $('.js-slick-carousel > div').length;
     var prev = document.querySelector("#prev")
     var next = document.querySelector("#next")
     prev.remove();
@@ -82,3 +99,5 @@ $(window).on("load", ()=>{
 // reinitialization
 $('.js-slick-carousel').on('reInit', () => console.log('slick re-init fired'));
 $( window ).resize(handleResize);
+
+

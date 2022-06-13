@@ -204,3 +204,13 @@ nav .dropdown-menu[data-bs-popper] {
 .separatorBlank{
   width: 50px;
 }
+.imageContainer{
+  height : 40vh;
+  width: 100%;
+}
+.col p{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

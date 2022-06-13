@@ -10,31 +10,53 @@
         </div>
     </div>
 </section>
- <div class="jumbotron text-center bg-blue3">
-            <div class="pb-5 pt-3 display-3 white1 ">Mes projets</div>
+<div class="jumbotron text-center bg-blue3">
+    <div class="pb-5 pt-3 display-3 white1 ">Mes projets</div>
 </div>
 <div class="d-flex bg-blue3 mb-5">
     <div class="separatorBlank"></div>
     <div class="prev h1 d-flex align-items-center white1" id="prev"><i class="fa-solid fa-angle-left"></i></div>
-    <div class="container py-3">  
+    <div class="container py-3">
         <div class="row js-slick-carousel">
-            
+            {% for project in projects %}
             <div class="col">
                 <div class="card mx-2">
-                    <img class="aspect-16to9 card-img-top" src="https://via.placeholder.com/1000x560" alt="" />
+
+                    <div class="imageContainer"
+                        style="background : url('{{project.urlImage}}');background-size : cover;"></div>
                     <div class="card-body p-16to9">
                         <div class="card-body-content">
-                            <h5 class="card-title">Liens exercice 2 :</h5>
+                            <h5 class="card-title">{{ project.nameProject }}</h5>
                             <p class="card-text m-0">
-                            <div class="row h-100">
-                                <div class="col d-flex justify-content-center align-items-center"><a href="#" class="btn"><i class="fa-brands fa-github h1"></i></a></div>
-                                <div class="col d-flex justify-content-center align-items-center"><a href="#" class="btn"><i class="fa-solid fa-link h1"></i></a></div>
-                            </div>
+                                <div class="row h-100">
+                                    <div class="col d-flex justify-content-center align-items-center"><a
+                                            href="{{ project.lienGithub }}" class="btn"><i
+                                                class="fa-brands fa-github h1"></i></a></div>
+                                    <div class="col d-flex justify-content-center align-items-center"><a
+                                            href="{{ project.lienProjet }}" class="btn"><i
+                                                class="fa-solid fa-link h1"></i></a></div>
+                                    <div class="col">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam recusandae,
+                                            eius quam esse tempora non necessitatibus excepturi magni repudiandae rem
+                                            velit natus, corporis ipsum maxime voluptatibus. Soluta voluptates deserunt
+                                            aliquam?
+                                            Modi consequatur amet iure voluptatibus quia totam, eaque dolores obcaecati
+                                            veniam? Excepturi laborum eaque nulla labore, aut necessitatibus dolores
+                                            obcaecati reprehenderit hic quasi neque deserunt perspiciatis adipisci
+                                            aspernatur, eveniet natus?</p>
+                                    </div>
+
+                                </div>
                             </p>
+
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+
+
+
         </div>
     </div>
     <div class="next h1 d-flex align-items-center white1" id="next"><i class="fa-solid fa-angle-right"></i></div>

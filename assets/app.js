@@ -7,6 +7,10 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+//PDF make
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 //Importation de bootstrap
 //JS de bootstrap
@@ -21,64 +25,94 @@ import "@fortawesome/fontawesome-free/js/all"
 const $ = require('jquery');
 import "slick-carousel/slick/slick"
 import "slick-carousel/slick/slick.css"
-
-if(document.querySelector("#form_document") !== null){
-  var formDocument =  document.querySelector("#form_document")
-  formDocument.addEventListener('submit', (e)=>{
+if (document.querySelector("#form_document") !== null) {
+  var formDocument = document.querySelector("#form_document")
+  formDocument.addEventListener('submit', (e) => {
     e.preventDefault();
-    fetch(document.location.href , {
-      body : new FormData(e.target),
-      method : 'POST'
-    }).then(()=>{
-      var messageDiv = document.querySelector(".message")
-      messageDiv.innerHTML = '  <div class="alert alert-check" role="alert">Message envoyé au serveur !</div>'
-    })
+    fetch(document.location.href, {
+        body: new FormData(e.target),
+        method: 'POST'
+      })
+      .then(() => {
+        var data = new FormData(e.target)
+        var titre = data.get("document[title_document]")
+        var texte = data.get("document[text]")
+        var messageDiv = document.querySelector(".message")
+        var dd = {
+          content: [{
+              text: titre,
+              style: 'header'
+            },
+            texte + '\n\n',
+            
+          ],
+          styles: {
+            header: {
+              fontSize: 18,
+              bold: true
+            },
+            subheader: {
+              fontSize: 15,
+              bold: true
+            },
+            quote: {
+              italics: true
+            },
+            small: {
+              fontSize: 8
+            }
+          }
+
+        }
+        messageDiv.innerHTML = '  <div class="alert alert-check" role="alert">Pdf généré et envoyé en bdd</div>'
+        var win = window.open('', '_blank');
+        pdfMake.createPdf(dd).print({}, win);
+      })
 
 
-  } )
+  })
 
 }
 
 
-if(numberSlide < 5 && document.querySelector("#next") !== null && document.querySelector("#next" !== null)){
-   var numberSlide = $('.js-slick-carousel > div').length;
-    var prev = document.querySelector("#prev")
-    var next = document.querySelector("#next")
-    prev.remove();
-    next.remove();
+if (numberSlide < 5 && document.querySelector("#next") !== null && document.querySelector("#next" !== null)) {
+  var numberSlide = $('.js-slick-carousel > div').length;
+  var prev = document.querySelector("#prev")
+  var next = document.querySelector("#next")
+  prev.remove();
+  next.remove();
 }
 
 
 var slickSettings = {
-    arrows: true,
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 2,
-    prevArrow: $('.prev'),
-    nextArrow: $('.next'),
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3
-        }
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
+  arrows: true,
+  infinite: true,
+  slidesToShow: 4,
+  slidesToScroll: 2,
+  prevArrow: $('.prev'),
+  nextArrow: $('.next'),
+  responsive: [{
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
       }
-    ]
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
 }
 
 
@@ -93,11 +127,9 @@ const handleResize = () => {
 // }
 
 // $('.js-slick-carousel').on('init', handleSlickInit);
-$(window).on("load", ()=>{
-    $('.js-slick-carousel').slick(slickSettings);
+$(window).on("load", () => {
+  $('.js-slick-carousel').slick(slickSettings);
 })
 // reinitialization
 $('.js-slick-carousel').on('reInit', () => console.log('slick re-init fired'));
-$( window ).resize(handleResize);
-
-
+$(window).resize(handleResize);

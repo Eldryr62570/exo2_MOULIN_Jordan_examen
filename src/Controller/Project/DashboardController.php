@@ -33,7 +33,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('User' , 'fa fa-user', User::class)->setPermission('ROLE_ADMIN');
        
         yield MenuItem::linkToCrud('Projets', 'fas fa-list', Project::class);
-        
     }
     
     

@@ -26,6 +26,14 @@ class MainController extends AbstractController
         ]);
     }
     /**
+     * @Route("/map", name="map")
+     */
+    public function map(ProjectRepository $projectRepository): Response
+    {
+        
+        return $this->render('main/map.html.twig');
+    }
+    /**
      * @Route("/projets/document", name="document")
      */
     public function document(Request $request, DocumentService $documentService ) : Response{ 

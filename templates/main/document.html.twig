@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}Génération d'un pdf{% endblock %}
+{% block stylesheets %}
+{{ encore_entry_link_tags('form') }}
+{% endblock %}
+{% block body %}
+
+<div class="formContainer">
+    <div class="form">
+        <div class="card p-4 m-3">
+        <div class="message"></div>
+            {{ form_start(documentForm , {
+                'attr' : 
+                     {'id' : 'form_document'}
+            }) }}
+            {{ form_row(documentForm.title_document, {
+                label: 'Titre'
+            }) }}
+            {{ form_row(documentForm.text, {
+                label: 'Texte du document'
+            }) }}
+            <button type="submit" class="btn btn-success">Générer</button>
+            {{ form_end(documentForm) }}
+        </div>
+    </div>
+</div>
+<div class="iframeContainer">
+
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+body{
+    background-color: whitesmoke !important;
+}
+.formContainer{
+    min-height : 50vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+form{
+    width: 400px;
+}
+textarea {
+    resize: none;
+    height: 265px;
+}

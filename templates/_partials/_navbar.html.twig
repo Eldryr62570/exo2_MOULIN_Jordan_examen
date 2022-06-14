@@ -10,9 +10,15 @@
         
         </a>
         <ul class="d-flex mb-0 menu-navbar">
+            
             <li>
                 <a class="nav-link" href="{{path('app_main')}}">
                     Accueil
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{path('map')}}">
+                    Map
                 </a>
             </li>
             <li>
@@ -30,6 +36,7 @@
                     Créateur de document
                 </a>
             </li>
+           
             {% if app.user %}
             <li>
                 <a class="nav-link" href="{{path('admin')}}">
